@@ -1,4 +1,4 @@
-package com.firstChallege_Fast_Rental.rentalcar;
+package com.firstChallege_Fast_Rental;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
