@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity(name="car")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,10 +14,9 @@ import java.util.Date;
 public class Car {
     @Id
     @GeneratedValue
-    private Long idChassi;
+    private Long chassiId;
     private String model;
     private String brand;
     private String color;
     private String fabricationYear;
-
 }
