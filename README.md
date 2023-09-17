@@ -26,7 +26,6 @@
   
   ![image](https://github.com/ThiagoMdO/SpringBoot_Challenge_01_ThiagoMendes/assets/128644651/a1f9e4ec-bac7-4115-a92b-a715c019ea0f)
   
-  <br/>
   3 . Fork this project
   <br/>
   4 . Configure this code in application.properties
