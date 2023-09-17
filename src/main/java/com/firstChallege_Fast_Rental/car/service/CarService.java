@@ -33,8 +33,6 @@ public class CarService {
                     || !StringUtils.hasText(car.getColor())
                     || !StringUtils.hasText(car.getFabricationYear())) {
                 throw new IllegalArgumentException("Please insert all of the fields in the form correctly");
-//                String responseData = "Response 422: Failure to validate data. Please insert all of the fields in the form correctly";
-//                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(responseData);
             } else {
                 if (Objects.equals(car.getBrand(), "Ford")
                         || Objects.equals(car.getBrand(), "Chevrolet")

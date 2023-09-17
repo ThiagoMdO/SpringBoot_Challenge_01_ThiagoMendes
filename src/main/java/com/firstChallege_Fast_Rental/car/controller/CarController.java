@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping
 public class CarController {
     @Autowired
     private CarService carService;
@@ -19,10 +20,10 @@ public class CarController {
         return carService.getAllCars();
     }
     @GetMapping("/car/{id}")
-    public ResponseEntity<String> getAllCarsDetails(@PathVariable long id) {
+    public ResponseEntity<?> getAllCarsDetails(@PathVariable long id) {
         Optional<Car> car = carService.getCarDetails(id);
         if (car.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.ok(car.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Response 404: car doesn't found");
         }
