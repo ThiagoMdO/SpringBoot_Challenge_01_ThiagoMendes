@@ -1,6 +1,6 @@
   <h1 align="center">
     <img src = "https://github.com/ThiagoMdO/SpringBoot_Challenge_01_ThiagoMendes/assets/128644651/bde6e273-cd90-4666-ac22-5c0df59b20cd" style="margin-top='30px' width:"50px"">
-		<p>Simple project - Banck-end - Car Rental - Cars Registration</p>
+		<p>Simple project - Back-end - Car Rental - Cars Registration</p>
 	</h1> 
  <h1>About 🚗</h1>
 
@@ -68,7 +68,7 @@
       #test_one
       localhost:8080/car/classiId
       
-      #or exemplo
+      #For exemplo
       localhost:8080/car/1001
 
   ```
@@ -88,6 +88,3 @@
   }
   ```
  
-  
-  
-  
