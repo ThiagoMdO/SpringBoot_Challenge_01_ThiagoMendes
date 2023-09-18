@@ -22,7 +22,9 @@
   ## How use it ⚙️
   1 . Instal JDK 17, link abolve
   <br/>
-  2 . Download Spring, link abolve 
+  2 . Download Spring, link abolve
+  <br/>
+  2.2 . Set the configuration Spring, below
   
   ![image](https://github.com/ThiagoMdO/SpringBoot_Challenge_01_ThiagoMendes/assets/128644651/a1f9e4ec-bac7-4115-a92b-a715c019ea0f)
   
@@ -80,11 +82,11 @@
   <br/>
   9.2.1 use this model to add new cars, in the body
   ```bash
-     {
-        "model": "233",
-        "brand": "BMW",
-        "color": "Gray",
-        "fabricationYear": "1999/2000"
-  }
+{
+	"model": "233",
+	"brand": "BMW",
+	"color": "Gray",
+	"fabricationYear": "1999/2000"
+}
   ```
  
