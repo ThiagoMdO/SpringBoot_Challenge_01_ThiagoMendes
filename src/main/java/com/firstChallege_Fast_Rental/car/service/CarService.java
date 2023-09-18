@@ -34,10 +34,10 @@ public class CarService {
                     || !StringUtils.hasText(car.getFabricationYear())) {
                 throw new IllegalArgumentException("Please insert all of the fields in the form correctly");
             } else {
-                if (Objects.equals(car.getBrand(), "Ford")
-                        || Objects.equals(car.getBrand(), "Chevrolet")
-                        || Objects.equals(car.getBrand(), "BMW")
-                        || Objects.equals(car.getBrand(), "Volvo")) {
+                if (Objects.equals(car.getBrand().toUpperCase(), "FORD")
+                        || Objects.equals(car.getBrand().toUpperCase(), "CHEVROLET")
+                        || Objects.equals(car.getBrand().toUpperCase(), "BMW")
+                        || Objects.equals(car.getBrand().toUpperCase(), "VOLVO")) {
                     repository.save(car);
                     return ResponseEntity.status(HttpStatus.CREATED).build();
                 } else {
@@ -47,7 +47,7 @@ public class CarService {
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Response 406. Type of content not acceptable, restart the application");
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         }
     }
 }
