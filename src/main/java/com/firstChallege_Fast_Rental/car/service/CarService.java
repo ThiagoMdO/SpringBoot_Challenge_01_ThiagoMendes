@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class CarService {
                     || !StringUtils.hasText(car.getModel())
                     || !StringUtils.hasText(car.getColor())
                     || !StringUtils.hasText(car.getFabricationYear())) {
-                throw new IllegalArgumentException("Please insert all of the fields in the form correctly");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please insert all of the fields in the form correctly");
             } else {
                 if (Objects.equals(car.getBrand().toUpperCase(), "FORD")
                         || Objects.equals(car.getBrand().toUpperCase(), "CHEVROLET")
@@ -46,7 +47,6 @@ public class CarService {
                 }
             }
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         }
     }
