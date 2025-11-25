@@ -1,6 +1,6 @@
-package com.firstChallege_Fast_Rental.car.exceptions;
+package com.firstChallege_Fast_Rental.exceptions;
 
-import com.firstChallege_Fast_Rental.car.exceptions.build.ErrorCodeEnum;
+import com.firstChallege_Fast_Rental.exceptions.build.ErrorCodeEnum;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

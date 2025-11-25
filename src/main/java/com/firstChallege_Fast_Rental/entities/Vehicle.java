@@ -1,13 +1,14 @@
-package com.firstChallege_Fast_Rental.car.model.entities;
+package com.firstChallege_Fast_Rental.entities;
 
-import com.firstChallege_Fast_Rental.car.enums.Brand;
+import com.firstChallege_Fast_Rental.enums.Brand;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "vehicle")
 @Data
 @ToString(of = "id")
 @NoArgsConstructor
@@ -15,11 +16,16 @@ import java.time.LocalDate;
 @Builder
 public class Vehicle {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
 
+    @Column(unique = true)
     private String chassiId;
+
     private String model;
+
+    @Enumerated(EnumType.STRING)
     private Brand brand;
     private String color;
     private Integer fabricationYear;

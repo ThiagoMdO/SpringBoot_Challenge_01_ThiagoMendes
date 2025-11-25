@@ -1,4 +1,4 @@
-package com.firstChallege_Fast_Rental.car.exceptions.build;
+package com.firstChallege_Fast_Rental.exceptions.build;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +8,10 @@ import lombok.RequiredArgsConstructor;
 public enum ErrorCodeEnum {
     VEHICLE_NOT_FOUND("Veiculo não encotrado."),
 
+    INVALID_ID("Id do carro incorreto."),
     INVALID_BRAND("Marca inválida"),
     INVALID_YEAR("Ano inválido"),
-    INVALID_PRICE("Valor incorreto, precisa ser ")
+    INVALID_PRICE("Valor incorreto."),
 
     SYSTEM_ERROR("Erro na consulta dos dados, problema no sistema.")
     ;

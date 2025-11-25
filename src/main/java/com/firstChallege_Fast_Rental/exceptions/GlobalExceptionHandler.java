@@ -1,8 +1,9 @@
-package com.firstChallege_Fast_Rental.car.exceptions;
+package com.firstChallege_Fast_Rental.exceptions;
 
-import com.firstChallege_Fast_Rental.car.exceptions.build.Problem;
-import com.firstChallege_Fast_Rental.car.exceptions.customException.CustomSecurityException;
+import com.firstChallege_Fast_Rental.exceptions.build.Problem;
+import com.firstChallege_Fast_Rental.exceptions.customException.CustomSecurityException;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -12,6 +13,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Problem> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        String message = "Erro de integridade de dados. Verifique se o número do chassi já existe na base de dados.";
+
+        Problem problem = new Problem(message, HttpStatus.CONFLICT);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
+    }
 
     @ExceptionHandler(CustomSecurityException.class)
     public ResponseEntity<Problem> handleCustomSecurityException(CustomSecurityException ex) {

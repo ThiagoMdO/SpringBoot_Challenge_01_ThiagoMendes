@@ -1,4 +1,4 @@
-package com.firstChallege_Fast_Rental.car.exceptions.build;
+package com.firstChallege_Fast_Rental.exceptions.build;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

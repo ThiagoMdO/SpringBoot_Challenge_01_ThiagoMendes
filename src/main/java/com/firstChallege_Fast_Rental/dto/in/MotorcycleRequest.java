@@ -1,9 +1,12 @@
 package com.firstChallege_Fast_Rental.dto.in;
 
 import com.firstChallege_Fast_Rental.enums.Brand;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-public record CarRequestDTO(
+public record MotorcycleRequest(
         @NotBlank(message = "Precisa do número do Chassi.")
         String chassiId,
 
@@ -24,14 +27,8 @@ public record CarRequestDTO(
         @Positive(message = "O preço deve ser maior que zero.")
         Double price,
 
-        @Min(value = 1, message = "Deve ser pelo menos uma porta.")
-        @Max(value = 6, message = "Número maximo de portas são 6.")
-        Integer doors,
+        boolean abs,
 
-        boolean air,
-
-        boolean automatic,
-
-        boolean airbag
+        boolean storageBox
 ) {
 }

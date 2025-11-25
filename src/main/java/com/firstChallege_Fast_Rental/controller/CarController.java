@@ -1,6 +1,7 @@
-package com.firstChallege_Fast_Rental.car.controller;
+package com.firstChallege_Fast_Rental.controller;
 
-import com.firstChallege_Fast_Rental.car.service.CarService;
+import com.firstChallege_Fast_Rental.dto.in.CarRequestUpdateDTO;
+import com.firstChallege_Fast_Rental.service.CarService;
 import com.firstChallege_Fast_Rental.dto.in.CarRequestDTO;
 import com.firstChallege_Fast_Rental.dto.out.CarResponseDTO;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -46,10 +48,18 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
-    @PostMapping("/crete/car")
+    @PostMapping("/create/car")
     public ResponseEntity<CarResponseDTO> createCar(@RequestBody @Valid CarRequestDTO carRequestDTO) {
         var carCreated = carService.createCar(carRequestDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(carCreated);
+    }
+
+    @PutMapping("/update/car/{id}")
+    @Transactional
+    public ResponseEntity<CarResponseDTO> updateCar(@PathVariable String id, @RequestBody @Valid CarRequestUpdateDTO requestUpdateDTO) {
+        var carUpdated = carService.updateCar(id, requestUpdateDTO);
+
+        return ResponseEntity.ok(carUpdated);
     }
 }

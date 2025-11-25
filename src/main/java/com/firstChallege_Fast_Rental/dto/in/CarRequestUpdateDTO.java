@@ -3,11 +3,7 @@ package com.firstChallege_Fast_Rental.dto.in;
 import com.firstChallege_Fast_Rental.enums.Brand;
 import jakarta.validation.constraints.*;
 
-public record CarRequestDTO(
-        @NotBlank(message = "Precisa do número do Chassi.")
-        String chassiId,
-
-        @NotBlank(message = "Precisa do nome do modelo.")
+public record CarRequestUpdateDTO(
         String model,
 
         @NotNull(message = "Precisa da marca.")
@@ -16,11 +12,9 @@ public record CarRequestDTO(
         @NotBlank(message = "Precisa da color.")
         String color,
 
-        @NotNull(message = "Precisa do ano de fabricação.")
         @Min(value = 1900, message = "Ano de fabricação inválido.")
         Integer fabricationYear,
 
-        @NotNull(message = "Precisa do preço do veículo.")
         @Positive(message = "O preço deve ser maior que zero.")
         Double price,
 
