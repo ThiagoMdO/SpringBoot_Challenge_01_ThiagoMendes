@@ -57,9 +57,9 @@ public class Car extends Vehicle{
         if (requestUpdateDTO.color() != null) setColor(requestUpdateDTO.color());
         if (requestUpdateDTO.fabricationYear() != null) setFabricationYear(requestUpdateDTO.fabricationYear());
         if (requestUpdateDTO.price() != null) setPrice(requestUpdateDTO.price());
-        if (requestUpdateDTO.fabricationYear() != null) setFabricationYear(requestUpdateDTO.fabricationYear());
-        if (requestUpdateDTO.fabricationYear() != null) setFabricationYear(requestUpdateDTO.fabricationYear());
-        if (requestUpdateDTO.fabricationYear() != null) setFabricationYear(requestUpdateDTO.fabricationYear());
-        if (requestUpdateDTO.fabricationYear() != null) setFabricationYear(requestUpdateDTO.fabricationYear());
+        if (requestUpdateDTO.doors() != null) setDoors(requestUpdateDTO.doors());
+        setAir(requestUpdateDTO.air());
+        setAutomatic(requestUpdateDTO.automatic());
+        setAirbag(requestUpdateDTO.airbag());
     }
 }
