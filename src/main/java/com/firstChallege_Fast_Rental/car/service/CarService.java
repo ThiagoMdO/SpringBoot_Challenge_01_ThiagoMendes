@@ -1,53 +1,76 @@
 package com.firstChallege_Fast_Rental.car.service;
 
-import com.firstChallege_Fast_Rental.car.bean.Car;
+import com.firstChallege_Fast_Rental.car.exceptions.build.ErrorCodeEnum;
+import com.firstChallege_Fast_Rental.car.exceptions.customException.CustomSecurityException;
+import com.firstChallege_Fast_Rental.car.model.entities.Car;
 import com.firstChallege_Fast_Rental.car.repository.CarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.firstChallege_Fast_Rental.dto.in.CarRequestDTO;
+import com.firstChallege_Fast_Rental.dto.out.CarResponseDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CarService {
 
-    @Autowired
-    private CarRepository repository;
+    private final CarRepository repository;
 
-    public List<Car> getAllCars() {
-        return repository.findAll();
+    public Page<CarResponseDTO> getAllCars(
+            String model,
+            String brand,
+            String color,
+            Integer minFabricationYear,
+            Integer maxFabricationYear,
+            Double minPrice,
+            Double maxPrice,
+            Pageable pageable
+    ) {
+        return repository.findAllCarsWithFilters(
+                model,
+                brand,
+                color,
+                minFabricationYear,
+                maxFabricationYear,
+                minPrice,
+                maxPrice,
+                pageable).map(CarResponseDTO::toDTO);
     }
 
-    public Optional<Car> getCarDetails(long id) {
-        return repository.findById(id);
+    public CarResponseDTO getCarById(String id) {
+        return repository.findById(id)
+                .map(CarResponseDTO::toDTO)
+                .orElseThrow(() -> new CustomSecurityException(ErrorCodeEnum.VEHICLE_NOT_FOUND));
     }
 
-    public ResponseEntity<String> createCar(Car car) {
-        try {
-            if (!StringUtils.hasText(car.getBrand())
-                    || !StringUtils.hasText(car.getModel())
-                    || !StringUtils.hasText(car.getColor())
-                    || !StringUtils.hasText(car.getFabricationYear())) {
-                throw new IllegalArgumentException("Please insert all of the fields in the form correctly");
-            } else {
-                if (Objects.equals(car.getBrand().toUpperCase(), "FORD")
-                        || Objects.equals(car.getBrand().toUpperCase(), "CHEVROLET")
-                        || Objects.equals(car.getBrand().toUpperCase(), "BMW")
-                        || Objects.equals(car.getBrand().toUpperCase(), "VOLVO")) {
-                    repository.save(car);
-                    return ResponseEntity.status(HttpStatus.CREATED).build();
-                } else {
-                    String responseData = "Response 404: Not found: Brand not authorized for registration, the field brand needs to be one of this brands: Ford, Chevrolet, BMW or Volvo. Please try again";
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-                }
-            }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+    public CarResponseDTO createCar(CarRequestDTO carRequestDTO) {
+        checkYearIsCorrect(carRequestDTO.fabricationYear());
+
+        var newCar = buildEntity(carRequestDTO);
+
+        return CarResponseDTO.toDTO(newCar);
+    }
+
+    private Car buildEntity(CarRequestDTO dto) {
+//        var car = Car.builder()
+//                .brand(dto.brand())
+//                .model(dto.model())
+//                .color(dto.color())
+//                .fabricationYear(dto.fabricationYear())
+//                .price(dto.price())
+//                .build();
+        var car = new Car(dto);
+
+        return repository.save(car);
+    }
+
+    private void checkYearIsCorrect(Integer fabricationYear) {
+
+        int currentYear = java.time.Year.now().getValue();
+
+        if (fabricationYear > currentYear) {
+            throw new CustomSecurityException(ErrorCodeEnum.INVALID_YEAR);
         }
     }
 }
