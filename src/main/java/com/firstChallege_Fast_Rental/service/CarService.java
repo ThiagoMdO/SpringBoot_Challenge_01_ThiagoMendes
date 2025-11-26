@@ -76,7 +76,8 @@ public class CarService {
     }
 
     private Double calculatePricePerDay(Vehicle vehicle) {
-        return (vehicle.getPrice() * priceFactory.getStrategy(vehicle.getBrand().toString()).calculatePricePercentage()) / 100 / 30;
+        var days = 30;
+        return (vehicle.getPrice() * priceFactory.getStrategy(vehicle.getBrand()).calculatePricePercentage()) / 100 / days;
     }
 
     private Car buildEntity(CarRequestDTO dto) {
